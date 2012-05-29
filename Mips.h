@@ -6,36 +6,37 @@
 using namespace std;
 
 class Mips
+
 {
     public:
-    //Métodos principais.
-           //Busca a instrução e incrementa o contador.
+    //Mï¿½todos principais.
+           //Busca a instruï¿½ï¿½o e incrementa o contador.
            void fecth(); 
-           //Extrai os campos da instrução, OP, RS, RD, RT, SHAMT e FUNCT.
+           //Extrai os campos da instruï¿½ï¿½o, OP, RS, RD, RT, SHAMT e FUNCT.
            void decode(); 
-           //Executa as intruções.
+           //Executa as intruï¿½ï¿½es.
            void execute(); 
-           //Executa uma-a-uma instrução.
+           //Executa uma-a-uma instruï¿½ï¿½o.
            void step(); 
-           //Executa o código até o final.
+           //Executa o cï¿½digo atï¿½ o final.
            void run(); 
            
-    //Métodos auxiliares.
-           //Mostra o conteúdo dos registradores.
+    //Mï¿½todos auxiliares.
+           //Mostra o conteï¿½do dos registradores.
            void dump_regs(); 
-           //Mostra o conteúdo da memória incluindo os endereços.
+           //Mostra o conteï¿½do da memï¿½ria incluindo os endereï¿½os.
            void dump_mem(int start, int end, char format); 
-           //Carrega as instruções de um arquivo de texto para a memória.
+           //Carrega as instruï¿½ï¿½es de um arquivo de texto para a memï¿½ria.
            void load(); 
            
     //Registradores.
            /*Contador de Programa, Opcode, Registrador fonte 1,
-           Registrador fonte 2, Registrador destino, Shift Amont, Função. */
+           Registrador fonte 2, Registrador destino, Shift Amont, Funï¿½ï¿½o. */
            int pc; 
            char ir[32], op[5], rs[4], rt[4], rd[15], shamt[4], funct[5]; 
-           //Registrador de instrução.
+           //Registrador de instruï¿½ï¿½o.
            
-    //Variável auxilar para contagem de quantas instruções tem o arquivo.
+    //Variï¿½vel auxilar para contagem de quantas instruï¿½ï¿½es tem o arquivo.
            int linhas;
 };
 
