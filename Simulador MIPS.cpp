@@ -67,7 +67,7 @@ void dump_regs()
     << "\nRegistrador funct: " << objFUNCT.funct << "\n" << endl;
 }
 
-// M�todo para mostrar o cont�do da mem�ria.
+// Método para mostrar o conteúdo da memória.
 
 void dump_mem(int start, int end, char format)
 
@@ -75,7 +75,7 @@ void dump_mem(int start, int end, char format)
     int x;
     unsigned long int aux1;
     x = start;
-    cout << "\n" << "Posi��o   Conte�do \n\n";
+    cout << "\n" << "Posição   Conteúdo \n\n";
     while(x <= end)
     {
         switch(format)
@@ -92,7 +92,7 @@ void dump_mem(int start, int end, char format)
                  break;
             default:
                  cout << line 
-                 << "ATEN��O!!! \nVoc� digitou uma op��o n�o compat�vel. "
+                 << "ATENÇÃO!!! \nVocê digitou uma opção não compatível. "
                  << "O programa sera encerrado! \n" << endl;
                  getch();
                  exit(0);
@@ -103,7 +103,7 @@ void dump_mem(int start, int end, char format)
     cout << "\n";
 }
 
-// M�todos de execu��o das instru��es (palavras).
+// Métodos de execução das instruções (palavras).
 
 void execute()
 
@@ -172,7 +172,7 @@ void execute()
     }
 }
 
-/* M�todo auxiliar para complementar as instru��es convertidas de DEC para BIN 
+/* Método auxiliar para complementar as instruções convertidas de DEC para BIN 
 com 'zeros' a esquerda. */
 
 void complemento(int quantidade01)
@@ -191,7 +191,7 @@ void complemento(int quantidade01)
      strcpy(objIR.ir, zero);
 }
 
-// M�todos de decodifica��o das instru��es para os registradores(palavras).
+// Métodos de decodificação das instruções para os registradores(palavras).
 
 void decode()
 
@@ -229,7 +229,7 @@ void decode()
     }
 }
 
-// M�todo de busca das instru��es.
+// Método de busca das instruções.
 
 void fetch()
 
@@ -240,7 +240,7 @@ void fetch()
     pc++;
 }
 
-// M�todo para carregar as instru��es (palavras) de um arquivo para a mem�ria.
+// Método para carregar as instruções (palavras) de um arquivo para a memória.
 
 void load()
 
@@ -250,7 +250,7 @@ void load()
     unsigned long int instrucao;
     
     cout << line << "Digite o endere�o (caminho) onde est� seu documento "
-    << "com as instru��es."
+    << "com as instruções."
     << "\nExemplo: \"C:\\Arquivos de programas\\MIPS\\mips.txt\" \n" << endl;
     cin >> caminho;
     
@@ -259,15 +259,15 @@ void load()
     if(arquivo.fail())
     {
         cout << "\n\nErro na abertura do arquivo!!! \n\n" << "Verifique se o "
-        << "caminho digitado est� correto. \n"
-        << "Verifique se o nome do arquivo est� correto. \nVerifique se a "
-        << "extens�o do arquivo "
+        << "caminho digitado está correto. \n"
+        << "Verifique se o nome do arquivo esá correto. \nVerifique se a "
+        << "extensão do arquivo "
         << "esta correta." << "\n\n\tPressione qualquer tecla para sair. ";
         getch();
         exit(0);
     }
     
-    int i = 0; //a vari�vel "i" far� a fun��o do PC nesse m�todo.
+    int i = 0; //a variável "i" fará a função do PC nesse método.
     while(arquivo.getline(inst, 33))
     {
         instrucao = strtoul(inst, NULL, 2);
@@ -278,7 +278,7 @@ void load()
     arquivo.close();
 }
 
-// M�todos para realizar busca, decidifica��o e execu��o das instru��es.
+// Métodos para realizar busca, decidificação e execução das instruções.
 
 void step()
 
@@ -288,8 +288,8 @@ void step()
     execute();
 }
 
-/* M�todo para realizar os passos do 'step' at� que n�o tenha mais intru��es 
-em mem�ria. */
+/* Método para realizar os passos do 'step' até que não tenha mais intruções 
+em meméria. */
 
 void run()
 
@@ -297,7 +297,7 @@ void run()
     step();
 }
 
-// M�todo auxiliar para mostrar o menu na tela.
+// Método auxiliar para mostrar o menu na tela.
 
 void dump()
 
@@ -305,25 +305,25 @@ void dump()
     int valor_ini, valor_fin;
     char escolha, formato;
     system("cls");
-    cout << line << "Escolha uma das op��es abaixo: \n\nDigite (1) para ver o "
-    << "conte�do dos registradores."
-    << "\nDigite (2) para ver o conte�do da mem�ria." 
-    << "\nDigite (3) para sair do programa. \n\nDigite sua op��o: ";
+    cout << line << "Escolha uma das opções abaixo: \n\nDigite (1) para ver o "
+    << "conteúdo dos registradores."
+    << "\nDigite (2) para ver o conteúdo da memória." 
+    << "\nDigite (3) para sair do programa. \n\nDigite sua opção: ";
     cin >> escolha;
     
     switch(escolha)
     {
         case '1':
              system("cls");
-             cout << line << "Op��o escolhida: " << escolha << "\n" << endl;
+             cout << line << "Opção escolhida: " << escolha << "\n" << endl;
              dump_regs();
              break;
         case '2':
              system("cls");
-             cout << line << "Op��o escolhida: " << escolha << "\n" << endl;
-             cout << "Digite a posi��o inicial da mem�ria a ser lida: ";
+             cout << line << "Opção escolhida: " << escolha << "\n" << endl;
+             cout << "Digite a posição inicial da memória a ser lida: ";
              cin >> valor_ini;
-             cout << "\nDigite o valor final da mem�ria a ser lida: ";
+             cout << "\nDigite o valor final da memória a ser lida: ";
              cin >> valor_fin;
              cout << "\nDigite o tipo a ser mostrado \n(D) para decimal ou (H) "
              << "para hexadecimal: ";
@@ -339,7 +339,7 @@ void dump()
     }
 }
 
-// M�todo principal.
+// Método principal.
 
 int main()
 
