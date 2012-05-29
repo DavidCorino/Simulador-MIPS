@@ -11,7 +11,7 @@ using namespace std;
 using std::getline;
 using std::string;
 
-// Declarações de objetos.
+// Declaraï¿½ï¿½es de objetos.
 
 Memory objMemory; 
 Mips objIR;
@@ -31,44 +31,51 @@ char line[] = "\n===============================================================
 // enums.
 
 enum opcode
+
 {
     LW = 35, SW = 43
 };
 
 enum function
+
 {
     ADD = 32, SUB = 34, MUL = 24, DIV = 26
 };
 
-// Método da classe Memory.
+// Mï¿½todo da classe Memory.
 
 int Memory::read(int address)
+
 {
     return m_array[address];
 }
 
 void Memory::write(int address, int data)
+
 {
+
     m_array[address] = data;
 }
 
-// Método para mostrar os valores finais armazenados nos registradores.
+// Mï¿½todo para mostrar os valores finais armazenados nos registradores.
 
 void dump_regs()
+
 {
     cout << "Registrador RS: " << objRS.rs << "\nRegistrador RT: " 
     << objRT.rt << "\nRegistrador RD: " << objRD.rd
     << "\nRegistrador funct: " << objFUNCT.funct << "\n" << endl;
 }
 
-// Método para mostrar o contúdo da memória.
+// Mï¿½todo para mostrar o contï¿½do da memï¿½ria.
 
 void dump_mem(int start, int end, char format)
+
 {
     int x;
     unsigned long int aux1;
     x = start;
-    cout << "\n" << "Posição   Conteúdo \n\n";
+    cout << "\n" << "Posiï¿½ï¿½o   Conteï¿½do \n\n";
     while(x <= end)
     {
         switch(format)
@@ -85,7 +92,7 @@ void dump_mem(int start, int end, char format)
                  break;
             default:
                  cout << line 
-                 << "ATENÇÃO!!! \nVocê digitou uma opção não compatível. "
+                 << "ATENï¿½ï¿½O!!! \nVocï¿½ digitou uma opï¿½ï¿½o nï¿½o compatï¿½vel. "
                  << "O programa sera encerrado! \n" << endl;
                  getch();
                  exit(0);
@@ -96,9 +103,10 @@ void dump_mem(int start, int end, char format)
     cout << "\n";
 }
 
-// Métodos de execução das instruções (palavras).
+// Mï¿½todos de execuï¿½ï¿½o das instruï¿½ï¿½es (palavras).
 
 void execute()
+
 {
     unsigned long int funcao, opcode=0, s0=0, s1=0, s2=0, t0=0, t1=0, t2=0;
     unsigned long int i, HI, LO, C;
@@ -118,21 +126,21 @@ void execute()
         case 0:
              switch(funcao)
              {
-                 case ADD: //Função de adição.
+                 case ADD: //Funï¿½ï¿½o de adiï¿½ï¿½o.
                       s2 = strtoul(objRS.rs,NULL, 2);
                       s1 = strtoul(objRT.rt, NULL, 2);
                       s0 = s2 + s1;
                       itoa(s0, objRD.rd, 2);
                       break;
              
-                 case SUB: //Função de subtração.
+                 case SUB: //Funï¿½ï¿½o de subtraï¿½ï¿½o.
                       s2 = strtoul(objRS.rs,NULL, 2);
                       s1 = strtoul(objRT.rt, NULL, 2);
                       s0 = s2 - s1;
                       itoa(s0, objRD.rd, 2); 
                       break;
              
-                 case MUL: //Função de multiplicação.
+                 case MUL: //Funï¿½ï¿½o de multiplicaï¿½ï¿½o.
                       s2 = strtoul(objRS.rs,NULL, 2);
                       s1 = strtoul(objRT.rt, NULL, 2);
                       i = 1;
@@ -145,7 +153,7 @@ void execute()
                       itoa(t0, objRD.rd, 2);
                       break;
              
-                 case DIV: //Função de divisão.
+                 case DIV: //Funï¿½ï¿½o de divisï¿½o.
                       s2 = strtoul(objRS.rs,NULL, 2);
                       s1 = strtoul(objRT.rt, NULL, 2);
                       t0 = s2;
@@ -164,10 +172,11 @@ void execute()
     }
 }
 
-/* Método auxiliar para complementar as instruções convertidas de DEC para BIN 
+/* Mï¿½todo auxiliar para complementar as instruï¿½ï¿½es convertidas de DEC para BIN 
 com 'zeros' a esquerda. */
 
 void complemento(int quantidade01)
+
 {
      int k = 0;
      char zero[100];
@@ -182,10 +191,12 @@ void complemento(int quantidade01)
      strcpy(objIR.ir, zero);
 }
 
-// Métodos de decodificação das instruções para os registradores(palavras).
+// Mï¿½todos de decodificaï¿½ï¿½o das instruï¿½ï¿½es para os registradores(palavras).
 
 void decode()
+
 {
+    
     int quantidade;
     quantidade = strlen(objIR.ir);
     if(quantidade < 32);
@@ -218,9 +229,10 @@ void decode()
     }
 }
 
-// Método de busca das instruções.
+// Mï¿½todo de busca das instruï¿½ï¿½es.
 
 void fetch()
+
 {
     unsigned long int instrucao1;
     instrucao1 = objMemory.read(pc);
@@ -228,16 +240,17 @@ void fetch()
     pc++;
 }
 
-// Método para carregar as instruções (palavras) de um arquivo para a memória.
+// Mï¿½todo para carregar as instruï¿½ï¿½es (palavras) de um arquivo para a memï¿½ria.
 
 void load()
+
 {
     setlocale(LC_ALL, "");
     char caminho[300], inst[32]; 
     unsigned long int instrucao;
     
-    cout << line << "Digite o endereço (caminho) onde está seu documento "
-    << "com as instruções."
+    cout << line << "Digite o endereï¿½o (caminho) onde estï¿½ seu documento "
+    << "com as instruï¿½ï¿½es."
     << "\nExemplo: \"C:\\Arquivos de programas\\MIPS\\mips.txt\" \n" << endl;
     cin >> caminho;
     
@@ -246,15 +259,15 @@ void load()
     if(arquivo.fail())
     {
         cout << "\n\nErro na abertura do arquivo!!! \n\n" << "Verifique se o "
-        << "caminho digitado está correto. \n"
-        << "Verifique se o nome do arquivo está correto. \nVerifique se a "
-        << "extensão do arquivo "
+        << "caminho digitado estï¿½ correto. \n"
+        << "Verifique se o nome do arquivo estï¿½ correto. \nVerifique se a "
+        << "extensï¿½o do arquivo "
         << "esta correta." << "\n\n\tPressione qualquer tecla para sair. ";
         getch();
         exit(0);
     }
     
-    int i = 0; //a variável "i" fará a função do PC nesse método.
+    int i = 0; //a variï¿½vel "i" farï¿½ a funï¿½ï¿½o do PC nesse mï¿½todo.
     while(arquivo.getline(inst, 33))
     {
         instrucao = strtoul(inst, NULL, 2);
@@ -265,49 +278,52 @@ void load()
     arquivo.close();
 }
 
-// Métodos para realizar busca, decidificação e execução das instruções.
+// Mï¿½todos para realizar busca, decidificaï¿½ï¿½o e execuï¿½ï¿½o das instruï¿½ï¿½es.
 
 void step()
+
 {
     fetch();
     decode();
     execute();
 }
 
-/* Método para realizar os passos do 'step' até que não tenha mais intruções 
-em memória. */
+/* Mï¿½todo para realizar os passos do 'step' atï¿½ que nï¿½o tenha mais intruï¿½ï¿½es 
+em memï¿½ria. */
 
 void run()
+
 {
     step();
 }
 
-// Método auxiliar para mostrar o menu na tela.
+// Mï¿½todo auxiliar para mostrar o menu na tela.
 
 void dump()
+
 {
     int valor_ini, valor_fin;
     char escolha, formato;
     system("cls");
-    cout << line << "Escolha uma das opções abaixo: \n\nDigite (1) para ver o "
-    << "conteúdo dos registradores."
-    << "\nDigite (2) para ver o conteúdo da memória." 
-    << "\nDigite (3) para sair do programa. \n\nDigite sua opção: ";
+    cout << line << "Escolha uma das opï¿½ï¿½es abaixo: \n\nDigite (1) para ver o "
+    << "conteï¿½do dos registradores."
+    << "\nDigite (2) para ver o conteï¿½do da memï¿½ria." 
+    << "\nDigite (3) para sair do programa. \n\nDigite sua opï¿½ï¿½o: ";
     cin >> escolha;
     
     switch(escolha)
     {
         case '1':
              system("cls");
-             cout << line << "Opção escolhida: " << escolha << "\n" << endl;
+             cout << line << "Opï¿½ï¿½o escolhida: " << escolha << "\n" << endl;
              dump_regs();
              break;
         case '2':
              system("cls");
-             cout << line << "Opção escolhida: " << escolha << "\n" << endl;
-             cout << "Digite a posição inicial da memória a ser lida: ";
+             cout << line << "Opï¿½ï¿½o escolhida: " << escolha << "\n" << endl;
+             cout << "Digite a posiï¿½ï¿½o inicial da memï¿½ria a ser lida: ";
              cin >> valor_ini;
-             cout << "\nDigite o valor final da memória a ser lida: ";
+             cout << "\nDigite o valor final da memï¿½ria a ser lida: ";
              cin >> valor_fin;
              cout << "\nDigite o tipo a ser mostrado \n(D) para decimal ou (H) "
              << "para hexadecimal: ";
@@ -323,9 +339,10 @@ void dump()
     }
 }
 
-// Método principal.
+// Mï¿½todo principal.
 
 int main()
+
 {
     load();
     int z = 0;
