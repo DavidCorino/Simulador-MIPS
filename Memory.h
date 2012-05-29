@@ -1,6 +1,6 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
-#define MEM_SIZE 1024 //Tamanho reservado na memória.
+#define MEM_SIZE 1024 //Tamanho reservado na memï¿½ria.
 
 class Memory
 {
